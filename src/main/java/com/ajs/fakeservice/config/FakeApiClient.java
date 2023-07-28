@@ -1,10 +1,10 @@
 package com.ajs.fakeservice.config;
 
 import com.ajs.fakeservice.model.Post;
-import org.springframework.web.bind.annotation.GetMapping;
-import reactor.core.publisher.Mono;
+import java.util.List;
+import org.springframework.web.service.annotation.GetExchange;
 
 public interface FakeApiClient {
-  @GetMapping("/posts")
-  Mono<Post> findAllPosts();
+  @GetExchange("/posts")
+  List<Post> findAllPosts();
 }
