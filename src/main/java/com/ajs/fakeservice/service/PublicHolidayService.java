@@ -22,8 +22,7 @@ public class PublicHolidayService {
   private final EmailService emailService;
   private final EmailReceiverConfig emailReceiverConfig;
 
-//  @Scheduled(cron = "00 25 18 ? * *")
-  @Scheduled(fixedRate = 10000)
+  @Scheduled(cron = "00 00 00 ? * *")
   public void checkPublicHolidayForToday() {
     log.info("Checking public holiday for {}", LocalDate.now());
     List<PublicHoliday> publicHolidays = publicHolidayApiClient.findPublicHolidaysByYearAndCountryCode(
