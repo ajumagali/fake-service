@@ -16,7 +16,7 @@ import static org.springframework.http.HttpStatus.OK;
 @RequiredArgsConstructor
 @RestController
 @Slf4j
-public class FakeApiController {
+public class PostsController {
   private final FakeApiService fakeApiService;
 
   @GetMapping(value = "/posts")

@@ -14,8 +14,8 @@ import static org.mockito.BDDMockito.given;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
-@WebMvcTest(controllers = FakeApiController.class)
-class FakeApiControllerTest {
+@WebMvcTest(controllers = PostsController.class)
+class PostsControllerTest {
   @MockBean
   private FakeApiService fakeApiService;
   @Autowired

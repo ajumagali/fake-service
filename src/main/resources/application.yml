@@ -1,2 +1,5 @@
 fakeapi:
   base-url: https://jsonplaceholder.typicode.com/
+
+publicholidayapi:
+  base-url: https://date.nager.at/api/v3/publicholidays/
