@@ -27,4 +27,11 @@ class FakeApiControllerTest {
     mockMvc.perform(get("/posts"))
           .andExpect(status().is2xxSuccessful());
   }
+
+  @Test
+  void testFindPostByIdSuccess() throws Exception {
+    given(fakeApiService.findPostById(1)).willReturn(Post.builder().build());
+    mockMvc.perform(get("/posts/1"))
+          .andExpect(status().is2xxSuccessful());
+  }
 }

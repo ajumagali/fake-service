@@ -18,4 +18,9 @@ public class FakeApiService {
     log.info("Call fake-api service to find all posts");
     return fakeApiClient.findAllPosts();
   }
+
+  public Post findPostById(final Integer id) {
+    log.info("Call fake-api service to find post by id {}", id);
+    return fakeApiClient.findPostById(id);
+  }
 }

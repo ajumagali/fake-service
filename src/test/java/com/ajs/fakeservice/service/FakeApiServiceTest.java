@@ -40,4 +40,10 @@ class FakeApiServiceTest {
     assertThrows(RuntimeException.class, () -> fakeApiClient.findAllPosts());
   }
 
+  @Test
+  void testFindPostById() {
+    given(fakeApiClient.findPostById(1)).willReturn(Post.builder().build());
+    var res = fakeApiService.findPostById(1);
+    assertThat(res).isNotNull();
+  }
 }
