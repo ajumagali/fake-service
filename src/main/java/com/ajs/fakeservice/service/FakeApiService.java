@@ -15,6 +15,7 @@ public class FakeApiService {
   private final FakeApiClient fakeApiClient;
 
   public List<Post> findAllPosts() {
+    log.info("Call fake-api service to find all posts");
     return fakeApiClient.findAllPosts();
   }
 }
