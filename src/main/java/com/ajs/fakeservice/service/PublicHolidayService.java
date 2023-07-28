@@ -1,5 +1,6 @@
 package com.ajs.fakeservice.service;
 
+import com.ajs.fakeservice.config.EmailReceiverConfig;
 import com.ajs.fakeservice.config.PublicHolidayApiClient;
 import com.ajs.fakeservice.model.PublicHoliday;
 import lombok.RequiredArgsConstructor;
@@ -18,8 +19,10 @@ public class PublicHolidayService {
   public static final String GB = "GB";
   public static final String YYYY_MM_DD = "yyyy-MM-dd";
   private final PublicHolidayApiClient publicHolidayApiClient;
+  private final EmailService emailService;
+  private final EmailReceiverConfig emailReceiverConfig;
 
-  @Scheduled(cron = "0 56 16 ? * *")
+  @Scheduled(cron = "00 25 18 ? * *")
   public void checkPublicHolidayForToday() {
     log.info("Checking public holiday for {}", LocalDate.now());
     List<PublicHoliday> publicHolidays = publicHolidayApiClient.findPublicHolidaysByYearAndCountryCode(
@@ -28,8 +31,22 @@ public class PublicHolidayService {
     for (PublicHoliday publicHoliday : publicHolidays) {
       if (publicHoliday.getDate() != null) {
         LocalDate date = LocalDate.parse(publicHoliday.getDate(), DateTimeFormatter.ofPattern(YYYY_MM_DD));
-        if (date.equals(LocalDate.now())) {
-          log.info("HOOORAY");
+//        if (date.equals(LocalDate.now())) {
+        if (date.equals(LocalDate.of(2023, 01, 01))) {
+          log.info("Today is a bank holiday {}", publicHoliday.getName());
+          final String msg = """
+                Hey,
+                      
+                Today is %s!
+                Enjoy it!
+                      
+                Cheers,
+                Your Public Holiday Service
+                """;
+          emailService.sendEmail(emailReceiverConfig.getEmailTo(),
+                "Happy " + publicHoliday.getName(),
+                String.format(msg, publicHoliday.getName())
+          );
         }
       }
     }
